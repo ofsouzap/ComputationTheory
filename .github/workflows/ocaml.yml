@@ -2,9 +2,9 @@ name: OCaml Dune CI
 
 on:
   push:
-    branches: [ "main", "ci-workflow" ]
+    branches: [ "main", "ci-workflow", "back-to-ocaml" ]
   pull_request:
-    branches: [ "main", "ci-workflow" ]
+    branches: [ "main", "ci-workflow", "back-to-ocaml" ]
 
 permissions:
   contents:
