@@ -1,21 +1,47 @@
 module ComputationTheory.RegisterMachines
   (  ) where
 
-data Instruction l =
+-- Typeclasses
+
+class Enum l => InstructionLabel l
+
+class (Eq a, Bounded a) => MemLoc a
+
+-- Data
+
+data Instruction l r =
     Halt
-  | Inc l
-  | Dec (l, l)
+  | Inc (r, l)
+  | Dec (r, l, l)
 
-newtype Program l = Program (l -> Instruction l)
+newtype InstructionLabel l => Program l r = Program (l -> Instruction l r)
 
-newtype Register = Register Integer
+type Register = Integer
 
-newtype Memory r = Memory (r -> Register)
+regBaseValue :: Register -> Bool
+regBaseValue = (==) 0
 
-newtype Config l r = Config (l, Memory r)
+newtype MemLoc r => Memory r = Memory (r -> Register)
 
-step :: Config l r -> Instruction l -> Either (Instruction l) (Config l r)
-step = undefined -- TODO
+memGet :: MemLoc r => r -> Memory r -> Register
+memGet x (Memory f) = f x
 
-run :: Config l r -> Program l -> Either (Instruction l) (Config l r)
+memInc :: MemLoc r => r -> Memory r -> Memory r
+memInc r old = Memory (\ x ->
+  if x == r
+  then memGet x old + 1
+  else memGet x old )
+
+memDec :: MemLoc r => r -> Memory r -> (Memory r, Bool)
+memDec r old = undefined -- TODO
+
+newtype (InstructionLabel l, MemLoc r) => Config l r = Config (l, Memory r)
+
+step :: (InstructionLabel l, MemLoc r) => Config l r -> Instruction l r -> Either (Memory r) (Config l r)
+step (Config (pc, mem)) Halt = Left mem
+step (Config (pc, mem)) (Inc (r,l)) = Right (Config
+  ( succ pc
+  , memInc r mem ))
+
+run :: (InstructionLabel l, MemLoc r) => Config l r -> Program l r -> Either (Memory r) (Config l r)
 run = undefined -- TODO
