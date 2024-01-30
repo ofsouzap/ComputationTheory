@@ -1,2 +1,3 @@
 (library
- (name ComputationTheory))
+ (name ComputationTheory)
+ (libraries qcheck))
