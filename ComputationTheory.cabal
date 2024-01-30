@@ -1,0 +1,27 @@
+cabal-version:      2.4
+name:               ComputationTheory
+version:            0.1.0.0
+
+license:            MIT
+author:             Ofsouzap
+maintainer:         ofsouzap@gmail.com
+
+library
+    exposed-modules:  ComputationTheory.RegisterMachines
+    build-depends:    base ^>=4.16.4.0,
+                      QuickCheck
+    hs-source-dirs:   ComputationTheory
+    default-language: Haskell2010
+    ghc-options:      -Wall
+
+test-suite TestComputationTheory
+    main-is:          Main.hs
+    other-modules:    RegisterMachineTests
+    build-depends:    base ^>=4.16.4.0,
+                      hspec,
+                      QuickCheck,
+                      ComputationTheory
+    hs-source-dirs:   TestComputationTheory
+    type:             exitcode-stdio-1.0
+    default-language: Haskell2010
+    ghc-options:      -Wall
