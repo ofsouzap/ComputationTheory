@@ -1,39 +1,28 @@
-type natural =
-  | Zero
-  | Succ of natural
+type natural = Natural of int
 
-let nat_succ n = Succ n
+let min_nat = Natural 0
 
-let nat_pred_or_zero = function
-  | Zero -> Zero
-  | Succ n -> n
+let max_nat = Natural max_int
 
-let rec nat_plus a = function
-  | Zero -> a
-  | Succ b' -> nat_plus (Succ a) b'
+let nat_succ (Natural n) = Natural (n + 1)
 
-let rec nat_monus a b = match (a, b) with
-  | (a, Zero) -> a
-  | (Zero, _) -> Zero
-  | (Succ a', Succ b') -> nat_monus a' b'
+let nat_pred_or_zero (Natural n) = if n = 0
+  then Natural 0
+  else Natural (n - 1)
 
-let nat_of_int =
-  let rec aux acc = function
-    | 0 -> acc
-    | n -> if n > 0
-      then aux (Succ acc) (n-1)
-      else failwith "Natural number must be non-negative"
-  in
-  aux Zero
+let nat_plus (Natural a) (Natural b) = Natural (a + b)
+
+let nat_monus (Natural a) (Natural b) = if b > a
+  then (Natural 0)
+  else (Natural (a - b))
+
+let nat_of_int x = if x >= 0
+  then Natural x
+  else failwith "Natural number must be non-negative"
 
 let nat_of_int_abs x = nat_of_int (abs x)
 
-let int_of_nat =
-  let rec aux acc = function
-    | Zero -> acc
-    | Succ x' -> aux (acc+1) x'
-  in
-  aux 0
+let int_of_nat (Natural n) = n
 
 let string_of_nat n = string_of_int (int_of_nat n)
 

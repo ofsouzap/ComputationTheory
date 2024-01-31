@@ -1,14 +1,23 @@
-type natural =
-    | Zero
-    | Succ of natural
+type natural
+(** A natural number (ie. 0, 1, ...) *)
+
+val min_nat : natural
+(** The minimum natural number, zero *)
+
+val max_nat : natural
+(** The maximum representable natural number *)
 
 val nat_succ : natural -> natural
+(** The successor of a natural number *)
 
 val nat_pred_or_zero : natural -> natural
+(** The predecessor of a natural number or zero if the number is zero *)
 
 val nat_plus : natural -> natural -> natural
+(** Add two natural numbers *)
 
 val nat_monus : natural -> natural -> natural
+(** Subtract two natural numbers or return zero if the result of the integer subtraction would be negative *)
 
 val nat_of_int : int -> natural
 
