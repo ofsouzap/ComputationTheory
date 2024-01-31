@@ -26,6 +26,10 @@ let int_of_nat (Natural n) = n
 
 let string_of_nat n = string_of_int (int_of_nat n)
 
+let nat_zero = nat_of_int 0
+
+let nat_one = nat_of_int 1
+
 let nat_gen = QCheck.Gen.map nat_of_int_abs QCheck.Gen.nat
 
 let nat_arbitrary = QCheck.make nat_gen ~print:string_of_nat

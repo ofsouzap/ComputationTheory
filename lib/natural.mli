@@ -25,6 +25,14 @@ val int_of_nat : natural -> int
 
 val string_of_nat : natural -> string
 
+val nat_zero : natural
+(** The natural number zero *)
+
+val nat_one : natural
+(** The natural number one *)
+
 val nat_gen : natural QCheck.Gen.t
 
 val nat_arbitrary : natural QCheck.arbitrary
+
+(* TODO - helpers for creating programs *)
