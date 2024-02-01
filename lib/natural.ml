@@ -16,6 +16,19 @@ let nat_monus (Natural a) (Natural b) = if b > a
   then (Natural 0)
   else (Natural (a - b))
 
+let nat_times (Natural a) (Natural b) = Natural (a * b)
+
+let nat_pow (Natural a) (Natural b) =
+  let rec aux a = function
+    | 0 -> 1
+    | 1 -> a
+    | b ->
+      if b mod 2 = 0
+      then aux (a*a) (b/2)
+      else a * aux (a*a) (b/2)
+  in
+  Natural (aux a b)
+
 let nat_of_int x = if x >= 0
   then Natural x
   else failwith "Natural number must be non-negative"
