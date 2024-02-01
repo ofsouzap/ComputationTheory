@@ -61,3 +61,21 @@ val build_memory : register list -> memory
 
 val build_program : instruction list -> program
 (** Build a program from a list of instructions. The first instruction will be given label 0 and all other instructions will be taken as HALT instructions *)
+
+val memory_gen : memory QCheck.Gen.t
+(** QCheck generator for a memory *)
+
+val memory_arbitrary : memory QCheck.arbitrary
+(** QCheck arbitrary for a memory *)
+
+val program_gen : program QCheck.Gen.t
+(** QCheck generator for a program *)
+
+val program_arbitrary : program QCheck.arbitrary
+(** QCheck arbitrary for a program *)
+
+val configuration_gen : configuration QCheck.Gen.t
+(** QCheck generator for a configuration *)
+
+val configuration_arbitrary : configuration QCheck.arbitrary
+(** QCheck arbitrary for a configuration *)

@@ -66,3 +66,26 @@ let build_program (xs : instruction list) : program =
     | (i, _::ts) -> aux (i-1, ts)
   in
   fun x -> aux (x, xs)
+
+let register_label_gen = QCheck.Gen.(map Natural.int_of_nat Natural.nat_gen)
+
+let register_gen = Natural.nat_gen
+
+let memory_gen = QCheck.Gen.(map build_memory (list register_gen))
+
+let memory_arbitrary = QCheck.make memory_gen
+
+let instruction_label_gen = QCheck.Gen.(map Natural.int_of_nat Natural.nat_gen)
+
+let instruction_gen = QCheck.Gen.(frequency
+  [ 1, return Halt
+  ; 2, map (fun (r,l) -> Inc (r,l)) (pair register_label_gen instruction_label_gen)
+  ; 2, map (fun (r,l0,l1) -> Dec (r,l0,l1)) (triple register_label_gen instruction_label_gen instruction_label_gen) ])
+
+let program_gen = QCheck.Gen.(map build_program (list instruction_gen))
+
+let program_arbitrary = QCheck.make program_gen
+
+let configuration_gen = QCheck.Gen.(pair instruction_label_gen memory_gen)
+
+let configuration_arbitrary = QCheck.make configuration_gen

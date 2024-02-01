@@ -1,7 +1,19 @@
 open ComputationTheory.Natural
 open ComputationTheory.Register_machine
 
-(* TODO - create tests *)
+let const a _ = a
+
+(* Configuration stepping *)
+
+let conf_step_test =
+  QCheck.Test.make ~count:1000
+  QCheck.(pair program_arbitrary configuration_arbitrary)
+  ( fun (prog, conf) -> const true (configuration_step prog conf) )
+
+let conf_step_suite = List.map QCheck_alcotest.to_alcotest
+  [ conf_step_test ]
+
+(* Adding program *)
 
 let prog_add : program = build_program
   [ Dec (1, 1, 2)
@@ -25,4 +37,5 @@ let rm_add_suite = List.map QCheck_alcotest.to_alcotest
 let () =
   let open Alcotest in
   run "Register Machine"
-    [ "Add machine", rm_add_suite ]
+    [ "Configuration stepping", conf_step_suite
+    ; "Add machine", rm_add_suite ]
