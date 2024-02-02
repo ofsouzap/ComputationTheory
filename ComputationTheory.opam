@@ -9,6 +9,7 @@ bug-reports: "https://github.com/ofsouzap/ComputationTheory/issues"
 depends: [
   "ocaml"
   "dune" {>= "3.13"}
+  "zarith"
   "alcotest"
   "fmt"
   "qcheck"

@@ -16,4 +16,4 @@
 (package
  (name ComputationTheory)
  (synopsis "Computation Theory stuff code")
- (depends ocaml dune alcotest fmt qcheck qcheck-alcotest))
+ (depends ocaml dune zarith alcotest fmt qcheck qcheck-alcotest))

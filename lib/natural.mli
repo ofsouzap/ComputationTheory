@@ -1,11 +1,8 @@
 type natural
-(** A natural number (ie. 0, 1, ...) *)
+(** An arbitrary-precision natural number (ie. 0, 1, ...) *)
 
 val min_nat : natural
 (** The minimum natural number, zero *)
-
-val max_nat : natural
-(** The maximum representable natural number *)
 
 val nat_succ : natural -> natural
 (** The successor of a natural number *)
@@ -31,7 +28,11 @@ val nat_mod : natural -> natural -> natural
 val nat_pow : natural -> natural -> natural
 (** Compute the integer power of two natural numbers *)
 
+val nat_of_z : Z.t -> natural
+
 val nat_of_int : int -> natural
+
+val z_of_nat : natural -> Z.t
 
 val int_of_nat : natural -> int
 

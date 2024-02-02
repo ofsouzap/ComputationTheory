@@ -1,45 +1,38 @@
-type natural = Natural of int
+type natural = Natural of Z.t
 
-let min_nat = Natural 0
+let min_nat = Natural Z.zero
 
-let max_nat = Natural max_int
+let nat_succ (Natural n) = Natural (Z.add n Z.one)
 
-let nat_succ (Natural n) = Natural (n + 1)
+let nat_pred_or_zero (Natural n) = if n = Z.zero
+  then Natural Z.zero
+  else Natural (Z.sub n Z.one)
 
-let nat_pred_or_zero (Natural n) = if n = 0
-  then Natural 0
-  else Natural (n - 1)
-
-let nat_plus (Natural a) (Natural b) = Natural (a + b)
+let nat_plus (Natural a) (Natural b) = Natural (Z.add a b)
 
 let nat_monus (Natural a) (Natural b) = if b > a
-  then (Natural 0)
-  else (Natural (a - b))
+  then (Natural Z.zero)
+  else (Natural (Z.sub a b))
 
-let nat_times (Natural a) (Natural b) = Natural (a * b)
+let nat_times (Natural a) (Natural b) = Natural (Z.mul a b)
 
-let nat_div (Natural a) (Natural b) = Natural (a / b)
+let nat_div (Natural a) (Natural b) = Natural (Z.div a b)
 
-let nat_mod (Natural a) (Natural b) = Natural (a mod b)
+let nat_mod (Natural a) (Natural b) = Natural (Z.(mod) a b)
 
-let nat_pow (Natural a) (Natural b) =
-  let rec aux a = function
-    | 0 -> 1
-    | 1 -> a
-    | b ->
-      if b mod 2 = 0
-      then aux (a*a) (b/2)
-      else a * aux (a*a) (b/2)
-  in
-  Natural (aux a b)
+let nat_pow (Natural a) (Natural b) = Natural (Z.pow a (Z.to_int b))
 
-let nat_of_int x = if x >= 0
+let nat_of_z x = if Z.geq x Z.zero
   then Natural x
   else failwith "Natural number must be non-negative"
 
+let nat_of_int x = nat_of_z (Z.of_int x)
+
 let nat_of_int_abs x = nat_of_int (abs x)
 
-let int_of_nat (Natural n) = n
+let z_of_nat (Natural x) = x
+
+let int_of_nat n = Z.to_int (z_of_nat n)
 
 let string_of_nat n = string_of_int (int_of_nat n)
 
