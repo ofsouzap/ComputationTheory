@@ -1,0 +1,4 @@
+(executable
+ (public_name ComputationTheory)
+ (name main)
+ (libraries ComputationTheory))
