@@ -22,6 +22,12 @@ val nat_monus : natural -> natural -> natural
 val nat_times : natural -> natural -> natural
 (** Multiply two natural numbers *)
 
+val nat_div : natural -> natural -> natural
+(** Integer division on natural numbers *)
+
+val nat_mod : natural -> natural -> natural
+(** Modulo operator on natural numbers *)
+
 val nat_pow : natural -> natural -> natural
 (** Compute the integer power of two natural numbers *)
 
@@ -36,6 +42,9 @@ val nat_zero : natural
 
 val nat_one : natural
 (** The natural number one *)
+
+val nat_two : natural
+(** The natural number two *)
 
 val nat_gen : natural QCheck.Gen.t
 

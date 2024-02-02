@@ -18,6 +18,10 @@ let nat_monus (Natural a) (Natural b) = if b > a
 
 let nat_times (Natural a) (Natural b) = Natural (a * b)
 
+let nat_div (Natural a) (Natural b) = Natural (a / b)
+
+let nat_mod (Natural a) (Natural b) = Natural (a mod b)
+
 let nat_pow (Natural a) (Natural b) =
   let rec aux a = function
     | 0 -> 1
@@ -42,6 +46,8 @@ let string_of_nat n = string_of_int (int_of_nat n)
 let nat_zero = nat_of_int 0
 
 let nat_one = nat_of_int 1
+
+let nat_two = nat_of_int 2
 
 let nat_gen = QCheck.Gen.map nat_of_int_abs QCheck.Gen.nat
 

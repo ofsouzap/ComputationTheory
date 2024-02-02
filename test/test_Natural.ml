@@ -64,9 +64,25 @@ let test_monus =
     let exp = if x < y then 0 else x - y in
     int_of_nat (nat_monus (nat_of_int x) (nat_of_int y)) = exp )
 
+let test_mod =
+  QCheck.Test.make ~count:1000
+  QCheck.(pair int int)
+  ( fun (x',y') ->
+    let x,y = abs x', abs y' in
+    int_of_nat (nat_mod (nat_of_int x) (nat_of_int y)) = x mod y )
+
+let test_div =
+  QCheck.Test.make ~count:1000
+  QCheck.(pair int int)
+  ( fun (x',y') ->
+    let x,y = abs x', abs y' in
+    int_of_nat (nat_div (nat_of_int x) (nat_of_int y)) = x / y )
+
 let decrease_suite = List.map QCheck_alcotest.to_alcotest
   [ test_pred_or_zero
-  ; test_monus ]
+  ; test_monus
+  ; test_mod
+  ; test_div ]
 
 let () =
   let open Alcotest in
