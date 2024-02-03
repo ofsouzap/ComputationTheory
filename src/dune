@@ -1,3 +1,4 @@
 (library
+ (public_name ComputationTheory)
  (name ComputationTheory)
  (libraries zarith qcheck))
