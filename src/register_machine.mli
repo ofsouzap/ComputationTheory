@@ -56,6 +56,9 @@ val configuration_run : program -> configuration -> memory
 (** Run a program given an initial configuration until it reaches a HALT. If fed a non-terminating program-memory combination, this won't terminate.
     If only there were an algorithm to check if the arbitrary program would terminate given its input or not so this could be checked before running the program *)
 
+val configuration_step_unfold : program -> configuration -> configuration list * memory
+(** Run a program and return all the intermediate configurations *)
+
 val build_memory : register list -> memory
 (** Build a memory of registers from a list of register values. The first value is given label 0 and all other registers are given value 0 *)
 

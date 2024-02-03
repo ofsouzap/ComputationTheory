@@ -51,6 +51,14 @@ let rec configuration_run (prog : program) (conf : configuration) : memory = mat
   | Either.Left mem_out -> mem_out
   | Either.Right conf' -> configuration_run prog conf'
 
+let configuration_step_unfold (prog : program) (conf : configuration) : configuration list * memory =
+  let rec aux acc c = match configuration_step prog c with
+    | Either.Left mem -> acc, mem
+    | Either.Right c' -> aux (c'::acc) c'
+  in
+  let cs,m = aux [] conf in
+  List.rev cs, m
+
 let build_memory (xs : register list) : memory =
   let rec aux = function
     | (_, []) -> register_default
