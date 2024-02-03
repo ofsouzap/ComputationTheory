@@ -28,6 +28,12 @@ val nat_mod : natural -> natural -> natural
 val nat_pow : natural -> natural -> natural
 (** Compute the integer power of two natural numbers *)
 
+val nat_min : natural -> natural -> natural
+(** Compute the minimum of two natural numbers *)
+
+val nat_max : natural -> natural -> natural
+(** Compute the maximum of two natural numbers *)
+
 val nat_of_z : Z.t -> natural
 
 val nat_of_int : int -> natural

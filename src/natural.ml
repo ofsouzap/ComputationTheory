@@ -22,6 +22,10 @@ let nat_mod (Natural a) (Natural b) = Natural (Z.(mod) a b)
 
 let nat_pow (Natural a) (Natural b) = Natural (Z.pow a (Z.to_int b))
 
+let nat_min (Natural a) (Natural b) = Natural (Z.min a b)
+
+let nat_max (Natural a) (Natural b) = Natural (Z.max a b)
+
 let nat_of_z x = if Z.geq x Z.zero
   then Natural x
   else failwith "Natural number must be non-negative"

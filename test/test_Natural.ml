@@ -81,10 +81,28 @@ let decrease_suite = List.map QCheck_alcotest.to_alcotest
   ; test_mod
   ; test_div ]
 
+let test_min =
+  QCheck.Test.make ~count:1000
+  QCheck.(pair int int)
+  ( fun (x',y') ->
+    let x,y = Z.of_int (abs x'), Z.of_int (abs y') in
+    z_of_nat (nat_min (nat_of_z x) (nat_of_z y)) = Z.min x y )
+
+let test_max =
+  QCheck.Test.make ~count:1000
+  QCheck.(pair int int)
+  ( fun (x',y') ->
+    let x,y = Z.of_int (abs x'), Z.of_int (abs y') in
+    z_of_nat (nat_max (nat_of_z x) (nat_of_z y)) = Z.max x y )
+
+let compare_suite = List.map QCheck_alcotest.to_alcotest
+  [ test_min
+  ; test_max ]
+
 let () =
   let open Alcotest in
   run "Natural"
   [ "Identity Conversions", identity_suite
   ; "Increasing values", increase_suite
   ; "Decreasing values", decrease_suite
-  ]
+  ; "Comparing values", compare_suite ]
