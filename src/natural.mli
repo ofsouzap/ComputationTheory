@@ -28,6 +28,9 @@ val nat_mod : natural -> natural -> natural
 val nat_pow : natural -> natural -> natural
 (** Compute the integer power of two natural numbers *)
 
+val nat_log2 : natural -> natural
+(** Compute the logarithm base-2, rounded down, of a natural number. If the input is 0 then returns 0 *)
+
 val nat_min : natural -> natural -> natural
 (** Compute the minimum of two natural numbers *)
 

@@ -43,8 +43,7 @@ let increase_suite = List.map QCheck_alcotest.to_alcotest
   [ test_succ
   ; test_plus
   ; test_times
-  ; test_pow
-   ]
+  ; test_pow ]
 
 let test_pred_or_zero =
   QCheck.Test.make ~count:1000
@@ -75,11 +74,20 @@ let test_div =
     let x,y = Z.of_int (abs x'), Z.of_int (abs y') in
     z_of_nat (nat_div (nat_of_z x) (nat_of_z y)) = Z.div x y )
 
+let test_log2 =
+  QCheck.Test.make ~count:100
+  tiny_int_arbitrary
+  ( fun x' -> let x = Z.of_int (abs x') in
+    if x' = 0
+    then nat_log2 (nat_of_z x) = nat_zero
+    else z_of_nat (nat_log2 (nat_of_z x)) = Z.of_int (Z.log2 x))
+
 let decrease_suite = List.map QCheck_alcotest.to_alcotest
   [ test_pred_or_zero
   ; test_monus
   ; test_mod
-  ; test_div ]
+  ; test_div
+  ; test_log2 ]
 
 let test_min =
   QCheck.Test.make ~count:1000

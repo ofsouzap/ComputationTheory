@@ -22,6 +22,10 @@ let nat_mod (Natural a) (Natural b) = Natural (Z.(mod) a b)
 
 let nat_pow (Natural a) (Natural b) = Natural (Z.pow a (Z.to_int b))
 
+let nat_log2 (Natural x) = if x = Z.zero
+  then Natural Z.zero
+  else Natural (Z.of_int (Z.log2 x))
+
 let nat_min (Natural a) (Natural b) = Natural (Z.min a b)
 
 let nat_max (Natural a) (Natural b) = Natural (Z.max a b)
