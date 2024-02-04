@@ -44,3 +44,16 @@ let modulo = build_program
   ; Dec (1, 11, halt)
   ; Inc (0, 10)
   ; Halt ] )
+
+let exp2 = build_program
+  ( let halt = 9 in
+  [ Inc (0, 1)
+  ; Dec (1, 2, halt)
+  ; Dec (0, 3, 5)
+  ; Inc (2, 4)
+  ; Inc (3, 2)
+  ; Dec (2, 6, 7)
+  ; Inc (0, 5)
+  ; Dec (3, 8, 1)
+  ; Inc (0, 7)
+  ; Halt ] )

@@ -2,7 +2,9 @@ open ComputationTheory.Natural
 open ComputationTheory.Register_machine
 open ComputationTheory.Register_machine_examples
 
-let tiny_natural_arbitrary = QCheck.make ~print:(fun n -> string_of_int (int_of_nat n)) (QCheck.Gen.map (nat_min (nat_of_int 10)) nat_gen)
+let natural_arbitrary_bound x = QCheck.make ~print:(fun n -> string_of_int (int_of_nat n)) (QCheck.Gen.map (nat_min (nat_of_int x)) nat_gen)
+
+let tiny_natural_arbitrary = natural_arbitrary_bound 20
 
 let test_first_project =
   QCheck.Test.make ~count:100 ~name:"First Project"
@@ -39,12 +41,20 @@ let test_modulo =
     let out = configuration_run modulo (instruction_zero, build_memory [nat_zero; x; y]) in
     out register_zero = if y = nat_zero then x else nat_mod x y )
 
+let test_exp2 =
+  QCheck.Test.make ~count:10 ~name:"Exp 2"
+  (natural_arbitrary_bound 10)
+  ( fun x ->
+    let out = configuration_run exp2 (instruction_zero, build_memory [nat_zero; x]) in
+    out register_zero = nat_pow nat_two x )
+
 let suite = List.map QCheck_alcotest.to_alcotest
   [ test_first_project
   ; test_const
   ; test_truncated_subtraction
   ; test_integer_division
-  ; test_modulo ]
+  ; test_modulo
+  ; test_exp2 ]
 
 let () =
   let open Alcotest in

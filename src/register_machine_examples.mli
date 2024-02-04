@@ -14,3 +14,6 @@ val integer_division : program
 
 val modulo : program
 (** The input values, x and y, should be stored in R1 and R2 respectively. The output is put into R0 *)
+
+val exp2 : program
+(** The input value, x, should be stored in R1. The output, 2^x, is put into R0 *)
